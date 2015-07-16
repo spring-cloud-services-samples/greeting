@@ -1,0 +1,11 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${vcap.services.service-registry.credentials.uri}/eureka/
+
+server:
+  port: 8082
+
+producer:
+  ribbon:
+    ServerListRefreshInterval: 5000

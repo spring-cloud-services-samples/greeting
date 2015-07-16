@@ -1,0 +1,56 @@
+:imagesdir: docs/images
+
+= Service Registry sample
+
+*Expedition* and *Camelboy* are example applications demonstrating the use of Service Registry for Pivotal Cloud Foundry. (For information on the Service Registry product, please http://docs.pivotal.io/spring-cloud-services/service-registry/[see the documentation].)
+
+== Building and Deploying
+
+. Build the two projects from the root (`greeting`) directory. If using Maven, run:
++
+....
+$ mvn package
+....
++
+If using Gradle, run `./gradlew build` (OS X, Linux) or `gradlew.bat build` (Windows).
++
+....
+$ ./gradlew build
+....
+
+. Run the deployment script (link:scripts/deploy.sh[`scripts/deploy.sh`] on Linux or OS X, link:scripts/deploy.bat[`scripts/deploy.bat`] on Windows).
++
+....
+$ ./scripts/deploy.sh
+....
++
+The script will create a Service Registry service instance and then push the applications and bind them to the service.
+
+== Trying It Out
+
+. Visit `[ROUTE]/hello`, where `[ROUTE]` is the route bound to the Camelboy application. The Camelboy application will use the Service Registry to look up the Expedition app and get a greeting message, which (to begin with) should be &#8220;Hello, camel boy!&#8221;
++
+image::greeting.png[link:docs/images/greeting.png]
+
+. You can see what the Expedition application is sending back by viewing its logs. Run `cf logs expedition`.
++
+....
+$ cf logs expedition
+Connected, tailing logs for app expedition in org myorg / space outer as user...
+
+2015-07-16T13:07:35.86-0500 [App/0]      OUT 2015-07-16 18:07:35.861  INFO 29 ---
+                     [o-61612-exec-10] expedition.ExpeditionApplication
+                                                  : Now saying "Hello" to camel boy
+2015-07-16T13:07:35.87-0500 [RTR/0]      OUT expedition.wise.com:80 -
+                     [16/07/2015:18:07:35 +0000]
+                     "GET /greeting?salutation=Hello&name=camel%20boy HTTP/1.1" 200
+                     31 "-" "Apache-HttpClient/4.3.6 (java 1.5)" 10.68.204.250:39929
+                     x_forwarded_for:"10.68.204.43, 10.68.204.250"
+                     vcap_request_id:66b782b6-9953-45b3-52ab-da369ad81f44
+                     response_time:0.016146581
+                     app_id:bd594ad5-2653-4949-afc6-e5f1ae568259
+....
+
+. To get a different greeting message, you can provide `salutation` and `name` parameters, as in `[ROUTE]/hello?salutation=Come%20on&name=Jesse`. The Camelboy application will send those parameters to the Expedition application and the resulting greeting will be customized to match.
++
+image::greeting-with-parameters.png[link:docs/images/greeting-with-parameters.png]
