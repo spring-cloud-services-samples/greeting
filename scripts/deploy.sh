@@ -1,5 +1,5 @@
 cf create-service p-service-registry standard service-registry
-sleep 10;
+sleep 40;
 pushd expedition && cf push
 popd; sleep 10
 pushd camelboy && cf push
