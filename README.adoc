@@ -18,7 +18,7 @@ If using Gradle, run `./gradlew build` (OS X, Linux) or `gradlew.bat build` (Win
 $ ./gradlew build
 ....
 
-. Run the deployment script (link:scripts/deploy.sh[`scripts/deploy.sh`] on Linux or OS X, link:scripts/deploy.bat[`scripts/deploy.bat`] on Windows).
+. Run the deployment script (if you used Maven, link:scripts/deploy_mvn.sh[`scripts/deploy_mvn.sh`] or link:scripts/deploy_mvn.bat[`scripts/deploy_mvn.bat`]; if you used Gradle, link:scripts/deploy_gradle.sh[`scripts/deploy_gradle.sh`] or link:scripts/deploy_gradle.bat[`scripts/deploy_gradle.bat`]).
 +
 ....
 $ ./scripts/deploy.sh
