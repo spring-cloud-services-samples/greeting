@@ -26,6 +26,32 @@ $ ./scripts/deploy_gradle.sh
 +
 The script will create a Service Registry service instance and then push the applications and bind them to the service.
 
+. When the script has finished, set the `CF_TARGET` environment variable in both applications to the API endpoint of your Elastic Runtime instance (as in `api.example.com`), then restage the applications so that the changes will take effect.
++
+....
+$ cf set-env expedition CF_TARGET black.wise.com
+Setting env variable 'CF_TARGET' to 'black.wise.com' for app expedition in org myorg / space outer as user...
+OK
+TIP: Use 'cf restage' to ensure your env variable changes take effect
+$ cf restage expedition
+....
++
+....
+$ cf set-env camelboy CF_TARGET black.wise.com
+Setting env variable 'CF_TARGET' to 'black.wise.com' for app camelboy in org myorg / space outer as user...
+OK
+TIP: Use 'cf restage' to ensure your env variable changes take effect
+$ cf restage camelboy
+....
++
+[IMPORTANT]
+====
+////
+By default, the Spring Cloud Services Starters for Service Registry will cause all application endpoints to be secured by HTTP Basic authentication. You may want to http://docs.pivotal.io/spring-cloud-services/service-registry/consuming-a-service.html#disable-http-basic-auth[disable this].
+////
+By default, the Spring Cloud Services Starters for Service Registry will cause all application endpoints to be secured by HTTP Basic authentication. You may want to disable this.
+====
+
 == Trying It Out
 
 . Visit `[ROUTE]/hello`, where `[ROUTE]` is the route bound to the Camelboy application. The Camelboy application will use the Service Registry to look up the Expedition app and get a greeting message, which (to begin with) should be &#8220;Hello, camel boy!&#8221;
