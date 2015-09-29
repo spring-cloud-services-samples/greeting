@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import io.pivotal.springcloud.ssl.CloudFoundryCertificateTruster;
+
 @SpringBootApplication
 @EnableDiscoveryClient
 @RestController
@@ -25,6 +27,7 @@ public class CamelboyApplication {
     private RestTemplate rest;
 
     public static void main(String[] args) {
+        CloudFoundryCertificateTruster.trustApiCertificate();
         SpringApplication.run(CamelboyApplication.class, args);
     }
 

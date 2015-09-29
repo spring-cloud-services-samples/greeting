@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import io.pivotal.springcloud.ssl.CloudFoundryCertificateTruster;
+
 @SpringBootApplication
 @EnableDiscoveryClient
 @RestController
@@ -18,6 +20,7 @@ public class ExpeditionApplication {
     private Log log = LogFactory.getLog(ExpeditionApplication.class);
 
     public static void main(String[] args) {
+        CloudFoundryCertificateTruster.trustApiCertificate();
         SpringApplication.run(ExpeditionApplication.class, args);
     }
 
