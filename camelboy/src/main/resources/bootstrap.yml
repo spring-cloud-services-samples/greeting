@@ -9,3 +9,9 @@ server:
 producer:
   ribbon:
     ServerListRefreshInterval: 5000
+
+  profiles: dev
+
+security:
+  basic:
+    enabled: false
