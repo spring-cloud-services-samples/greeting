@@ -1,7 +1,7 @@
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${vcap.services.service-registry.credentials.uri}/eureka/
+spring:
+  cloud:
+    services:
+      registrationMethod: route
 
 server:
   port: 8082

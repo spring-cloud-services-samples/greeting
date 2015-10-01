@@ -1,6 +1,9 @@
 spring:
   application:
     name: ${vcap.application.name}
+  cloud:
+    services:
+      registrationMethod: route
 
 eureka:
   instance:
