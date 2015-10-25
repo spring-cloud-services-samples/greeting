@@ -5,6 +5,9 @@ spring:
     services:
       registrationMethod: route
 
+---
+
+spring:
   profiles: dev
 
 security:
