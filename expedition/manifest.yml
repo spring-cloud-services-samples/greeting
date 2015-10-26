@@ -5,3 +5,5 @@ applications:
   - name: expedition
     services:
       - service-registry
+    env:
+      SPRING_PROFILES_ACTIVE: dev

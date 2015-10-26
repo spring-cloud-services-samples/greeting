@@ -1,8 +1,15 @@
 spring:
   application:
     name: ${vcap.application.name}
+  cloud:
+    services:
+      registrationMethod: route
 
-eureka:
-  instance:
-    hostname: ${vcap.application.uris[0]}
-    nonSecurePort: 80
+---
+
+spring:
+  profiles: dev
+
+security:
+  basic:
+    enabled: false
