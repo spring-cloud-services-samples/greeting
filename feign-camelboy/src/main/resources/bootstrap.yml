@@ -10,6 +10,9 @@ producer:
   ribbon:
     ServerListRefreshInterval: 5000
 
+ribbon:
+  IsSecure: false
+
   profiles: dev
 
 security:
