@@ -1,1 +1,1 @@
-include ':expedition',':camelboy'
+include ':message-generation',':greeter'

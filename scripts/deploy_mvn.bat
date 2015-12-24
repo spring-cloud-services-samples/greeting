@@ -1,9 +1,9 @@
 @echo off
 cf create-service p-service-registry standard service-registry
-pushd expedition
-cf push -p target/expedition-0.0.1-SNAPSHOT.jar
+pushd message-generation
+cf push -p target/message-generation-0.0.1-SNAPSHOT.jar
 popd
-pushd camelboy
-cf push -p target/camelboy-0.0.1-SNAPSHOT.jar
+pushd greeter
+cf push -p target/greeter-0.0.1-SNAPSHOT.jar
 popd
 echo Done!

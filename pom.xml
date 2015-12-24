@@ -9,7 +9,7 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>expedition</module>
-    <module>camelboy</module>
+    <module>message-generation</module>
+    <module>greeter</module>
   </modules>
 </project>
