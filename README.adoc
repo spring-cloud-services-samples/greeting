@@ -74,6 +74,6 @@ Connected, tailing logs for app message-generation in org myorg / space outer as
                      app_id:bd594ad5-2653-4949-afc6-e5f1ae568259
 ....
 
-. To get a different greeting message, you can provide `salutation` and `name` parameters, as in `[ROUTE]/hello?salutation=Come%20on&name=Jesse`. The Greeter application will send those parameters to the Message Generation application and the resulting greeting will be customized to match.
+. To get a different greeting message, you can provide `salutation` and `name` parameters, as in `[ROUTE]/hello?salutation=Hi&name=John`. The Greeter application will send those parameters to the Message Generation application and the resulting greeting will be customized to match.
 +
 image::greeting-with-parameters.png[link:docs/images/greeting-with-parameters.png]
