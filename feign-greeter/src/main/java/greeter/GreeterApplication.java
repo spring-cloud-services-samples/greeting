@@ -36,7 +36,7 @@ public class GreeterApplication {
 
     private static class Greeting {
 
-        private String message;
+        private final String message;
 
         @JsonCreator
         public Greeting(@JsonProperty("message") String message) {
