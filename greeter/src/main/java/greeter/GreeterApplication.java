@@ -5,6 +5,7 @@ import java.net.URI;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,6 +21,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 @EnableDiscoveryClient
 @RestController
 public class GreeterApplication {
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
     @Autowired
     private RestTemplate rest;
