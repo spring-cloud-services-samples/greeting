@@ -12,17 +12,41 @@
   <description>Sample consumer application demonstrating use of Service Registry for Pivotal Cloud Foundry.</description>
 
   <parent>
-    <groupId>io.pivotal.spring.cloud</groupId>
-    <artifactId>spring-cloud-services-starter-parent</artifactId>
-    <version>1.0.1.RELEASE</version>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.3.5.RELEASE</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
+  <dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>1.3.5.RELEASE</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.pivotal.spring.cloud</groupId>
+            <artifactId>spring-cloud-services-dependencies</artifactId>
+            <version>1.1.0.RELEASE</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>Brixton.SR1</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.7</java.version>
-    <!-- override the managed versions of Spring Cloud Netflix dependencies -->
-    <spring-cloud-netflix.version>1.0.4.RELEASE</spring-cloud-netflix.version>
+    <java.version>1.8</java.version>
   </properties>
 
   <dependencies>
@@ -30,12 +54,19 @@
       <groupId>io.pivotal.spring.cloud</groupId>
       <artifactId>spring-cloud-services-starter-service-registry</artifactId>
     </dependency>
+
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-feign</artifactId>
     </dependency>
-  </dependencies>
 
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
   <build>
     <plugins>
       <plugin>
@@ -44,12 +75,5 @@
       </plugin>
     </plugins>
   </build>
-
-  <repositories>
-    <repository>
-      <id>spring-release</id>
-      <url>https://repo.spring.io/libs-release</url>
-    </repository>
-  </repositories>
 
 </project>

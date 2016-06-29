@@ -3,12 +3,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
-        classpath("io.spring.gradle:dependency-management-plugin:0.5.1.RELEASE")
+        classpath("io.spring.gradle:dependency-management-plugin:0.5.6.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.5.RELEASE")
     }
 }
-
-ext["spring-cloud-netflix.version"] = "1.0.4.RELEASE"
 
 apply plugin: "java"
 apply plugin: "spring-boot"
@@ -21,7 +19,9 @@ jar {
 
 dependencyManagement {
     imports {
-        mavenBom "io.pivotal.spring.cloud:spring-cloud-services-starter-parent:1.0.1.RELEASE"
+        mavenBom "org.springframework.boot:spring-boot-dependencies:1.3.5.RELEASE"
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.SR1"
+        mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:1.1.0.RELEASE"
     }
 }
 
@@ -30,18 +30,15 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
-    maven {
-        url "https://repo.spring.io/libs-release"
-    }
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web:1.2.5.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-test")
     compile("io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry")
-    compile("org.springframework.cloud:spring-cloud-starter-feign:1.0.3.RELEASE")
+    compile("org.springframework.cloud:spring-cloud-starter-feign")
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = "2.3"
+    gradleVersion = "2.10"
 }
