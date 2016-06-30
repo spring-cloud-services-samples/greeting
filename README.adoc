@@ -26,7 +26,7 @@ $ ./scripts/deploy_gradle.sh
 +
 The script will create a Service Registry service instance and then push the applications and bind them to the service.
 
-. When the script has finished, set the `CF_TARGET` environment variable in both applications to the API endpoint of your Elastic Runtime instance (as in `https://api.example.com`), then restage the applications so that the changes will take effect.
+. When the script has finished, set the `CF_TARGET` environment variable to the API endpoint of your Elastic Runtime instance (as in `https://api.example.com`), then restage the applications so that the changes will take effect. Setting `CF_TARGET` causes Spring Cloud Services to add the the SSL certificate at the specfied API endpoint to the JVM's truststore, so that the client application can communicate with a Service Registry service instance even if your Elastic Runtime instance is using a self-signed SSL certificate (see the http://docs.pivotal.io/spring-cloud-services/service-registry/writing-client-applications.html#self-signed-ssl-certificate[Service Registry documentation]).
 +
 ....
 $ cf set-env message-generation CF_TARGET https://api.wise.com
@@ -46,7 +46,7 @@ $ cf restage greeter
 +
 [NOTE]
 ====
-By default, the Spring Cloud Services Starters for Service Registry causes all application endpoints to be secured by HTTP Basic authentication. For more information or if you wish to disable this, http://scs-docs.black.springapps.io/spring-cloud-services/service-registry/registering-a-service.html#disable-http-basic-auth[see the documentation]. (HTTP Basic authentication is disabled in these sample applications.)
+By default, the Spring Cloud Services Starters for Service Registry causes all application endpoints to be secured by HTTP Basic authentication. For more information or if you wish to disable this, http://docs.pivotal.io/spring-cloud-services/service-registry/writing-client-applications.html#disable-http-basic-auth[see the documentation]. (HTTP Basic authentication is disabled in these sample applications.)
 ====
 
 == Trying It Out
