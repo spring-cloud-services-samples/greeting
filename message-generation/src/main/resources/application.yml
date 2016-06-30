@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ${vcap.application.name}
+    name: message-generation
   cloud:
     services:
       registrationMethod: route
