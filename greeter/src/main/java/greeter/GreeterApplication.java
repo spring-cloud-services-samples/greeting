@@ -39,7 +39,7 @@ public class GreeterApplication {
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello(@RequestParam(value="salutation", defaultValue="Hello") String salutation, @RequestParam(value="name", defaultValue="Bob") String name) {
-        URI uri = UriComponentsBuilder.fromUriString("http://message-generation/greeting")
+        URI uri = UriComponentsBuilder.fromUriString("//message-generation/greeting")
             .queryParam("salutation", salutation)
             .queryParam("name", name)
             .build()
