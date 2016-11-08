@@ -26,11 +26,11 @@ $ ./scripts/deploy_gradle.sh
 +
 The script will create a Service Registry service instance and then push the applications and bind them to the service.
 
-. When the script has finished, set the `CF_TARGET` environment variable to the API endpoint of your Elastic Runtime instance (as in `https://api.example.com`), then restage the applications so that the changes will take effect. Setting `CF_TARGET` causes Spring Cloud Services to add the the SSL certificate at the specfied API endpoint to the JVM's truststore, so that the client application can communicate with a Service Registry service instance even if your Elastic Runtime instance is using a self-signed SSL certificate (see the http://docs.pivotal.io/spring-cloud-services/service-registry/writing-client-applications.html#self-signed-ssl-certificate[Service Registry documentation]).
+. When the script has finished, set the `TRUST_CERTS` environment variable to the API endpoint of your Elastic Runtime instance (as in `api.example.com`), then restage the applications so that the changes will take effect. Setting `TRUST_CERTS` causes Spring Cloud Services to add the the SSL certificate at the specfied API endpoint to the JVM's truststore, so that the client application can communicate with a Service Registry service instance even if your Elastic Runtime instance is using a self-signed SSL certificate (see the http://docs.pivotal.io/spring-cloud-services/service-registry/writing-client-applications.html#self-signed-ssl-certificate[Service Registry documentation]).
 +
 ....
-$ cf set-env message-generation CF_TARGET https://api.wise.com
-Setting env variable 'CF_TARGET' to 'https://api.wise.com' for app message-generation in org myorg / space outer as user...
+$ cf set-env message-generation TRUST_CERTS api.wise.com
+Setting env variable 'TRUST_CERTS' to 'api.wise.com' for app message-generation in org myorg / space development as user...
 OK
 TIP: Use 'cf restage' to ensure your env variable changes take effect
 $ cf restage message-generation
@@ -38,7 +38,7 @@ $ cf restage message-generation
 +
 ....
 $ cf set-env greeter CF_TARGET https://api.wise.com
-Setting env variable 'CF_TARGET' to 'https://api.wise.com' for app greeter in org myorg / space outer as user...
+Setting env variable 'CF_TARGET' to 'https://api.wise.com' for app greeter in org myorg / space development as user...
 OK
 TIP: Use 'cf restage' to ensure your env variable changes take effect
 $ cf restage greeter
@@ -59,7 +59,7 @@ image::greeting.png[link:docs/images/greeting.png]
 +
 ....
 $ cf logs message-generation
-Connected, tailing logs for app message-generation in org myorg / space outer as user...
+Connected, tailing logs for app message-generation in org myorg / space development as user...
 
 2015-07-16T13:07:35.86-0500 [App/0]      OUT 2015-07-16 18:07:35.861  INFO 29 ---
                      [o-61612-exec-10] message-generation.MessageGenerationApplication
@@ -77,3 +77,5 @@ Connected, tailing logs for app message-generation in org myorg / space outer as
 . To get a different greeting message, you can provide `salutation` and `name` parameters, as in `[ROUTE]/hello?salutation=Hi&name=John`. The Greeter application will send those parameters to the Message Generation application and the resulting greeting will be customized to match.
 +
 image::greeting-with-parameters.png[link:docs/images/greeting-with-parameters.png]
+
+For more information about the Service Registry and its use in a client application, see the http://docs.pivotal.io/spring-cloud-services/service-registry/writing-client-applications.html[Service Registry documentation].
