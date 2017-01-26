@@ -3,6 +3,7 @@ instances: 1
 memory: 1G
 applications:
   - name: message-generation
+    no-route: true
     services:
       - service-registry
     env:

@@ -4,7 +4,7 @@ buildscript {
     }
     dependencies {
         classpath("io.spring.gradle:dependency-management-plugin:0.6.1.RELEASE")
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.4.RELEASE")
     }
 }
 
@@ -17,11 +17,15 @@ jar {
     version = "0.0.1-SNAPSHOT"
 }
 
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/libs-snapshot-local" }
+}
+
 dependencyManagement {
     imports {
-        mavenBom "org.springframework.boot:spring-boot-dependencies:1.4.1.RELEASE"
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Camden.SR3"
-        mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:1.3.1.RELEASE"
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Camden.SR4"
+        mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:1.3.2.BUILD-SNAPSHOT"
     }
 }
 
@@ -29,9 +33,9 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web:1.4.1.RELEASE")
-    compile("org.springframework.boot:spring-boot-starter-test")
+    compile("org.springframework.boot:spring-boot-starter-web")
     compile("io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
 task wrapper(type: Wrapper) {
