@@ -1,8 +1,8 @@
 ---
-instances: 1
-memory: 1G
 applications:
   - name: greeter
+    instances: 1
+    memory: 1G
     services:
       - greeter-service-registry
     env:
