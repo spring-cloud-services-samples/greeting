@@ -1,5 +1,14 @@
-.gradle
-target
-*.DS_Store
+*~
+#*
+*#
+.#*
+.classpath
+.project
+.settings
+.springBeans
 .gradle
 build
+bin
+target/
+.idea
+*.iml
