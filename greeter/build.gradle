@@ -1,37 +1,38 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("io.spring.gradle:dependency-management-plugin:0.6.1.RELEASE")
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
-    }
+plugins {
+    id "org.springframework.boot" version "2.0.2.RELEASE"
 }
+
+version = "0.0.1-SNAPSHOT"
 
 apply plugin: "java"
-apply plugin: "spring-boot"
+apply plugin: "eclipse"
+apply plugin: "idea"
 apply plugin: "io.spring.dependency-management"
-
-jar {
-    baseName = "greeter"
-    version = "0.0.1-SNAPSHOT"
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.boot:spring-boot-dependencies:1.4.2.RELEASE"
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Camden.SR4"
-        mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:1.4.1.RELEASE"
-    }
-}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+jar {
+    baseName = "greeter"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Finchley.RC2"
+        mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:2.0.0.BUILD-SNAPSHOT"
+    }
+}
+
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web:1.4.2.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-test")
     compile("io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry")
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/libs-snapshot" }
 }
 
 task wrapper(type: Wrapper) {
