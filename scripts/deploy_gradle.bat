@@ -1,8 +1,8 @@
 @echo off
 echo Creating Service Registry...
-cf create-service p-service-registry standard service-registry > nul 
+cf create-service p-service-registry standard greeter-service-registry > nul
 :check
-  cf service service-registry | find "succeeded" > nul
+  cf service greeter-service-registry | find "succeeded" > nul
   if errorlevel 1 goto :check
   echo Service Registry created. Pushing applications.
   pushd message-generation
