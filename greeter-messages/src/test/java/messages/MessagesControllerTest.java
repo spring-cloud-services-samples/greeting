@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package messagegeneration;
+package messages;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,8 +30,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(MessageGenerationController.class)
-public class MessageGenerationControllerTest {
+@WebMvcTest(MessagesController.class)
+public class MessagesControllerTest {
 
 	@Autowired
 	private MockMvc mvc;

@@ -24,7 +24,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Service
 public class GreeterService {
 
-	private static final String URI_TEMPLATE = UriComponentsBuilder.fromUriString("//greeter-message-generation/greeting")
+	private static final String URI_TEMPLATE = UriComponentsBuilder.fromUriString("//greeter-messages/greeting")
 			.queryParam("salutation", "{salutation}")
 			.queryParam("name", "{name}")
 			.build()

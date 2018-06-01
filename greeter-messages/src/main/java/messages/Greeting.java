@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package messagegeneration;
+package messages;
 
 public class Greeting {
 

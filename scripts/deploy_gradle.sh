@@ -8,7 +8,7 @@ do
 done
 echo
 echo "Service Registry created. Pushing applications."
-pushd message-generation && cf push -p build/libs/message-generation-0.0.1-SNAPSHOT.jar
+pushd greeter-messages && cf push -p build/libs/greeter-messages-0.0.1-SNAPSHOT.jar
 popd
 pushd greeter && cf push -p build/libs/greeter-0.0.1-SNAPSHOT.jar
 popd

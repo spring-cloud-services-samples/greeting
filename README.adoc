@@ -29,11 +29,11 @@ The script will create a Service Registry service instance and then push the app
 . When the script has finished, set the `TRUST_CERTS` environment variable to the API endpoint of your Elastic Runtime instance (as in `api.example.com`), then restage the applications so that the changes will take effect. Setting `TRUST_CERTS` causes Spring Cloud Services to add the the SSL certificate at the specfied API endpoint to the JVM's truststore, so that the client application can communicate with a Service Registry service instance even if your Elastic Runtime instance is using a self-signed SSL certificate (see the http://docs.pivotal.io/spring-cloud-services/service-registry/writing-client-applications.html#self-signed-ssl-certificate[Service Registry documentation]).
 +
 ....
-$ cf set-env message-generation TRUST_CERTS api.wise.com
-Setting env variable 'TRUST_CERTS' to 'api.wise.com' for app message-generation in org myorg / space development as user...
+$ cf set-env greeter-messages TRUST_CERTS api.wise.com
+Setting env variable 'TRUST_CERTS' to 'api.wise.com' for app greeter-messages in org myorg / space development as user...
 OK
 TIP: Use 'cf restage' to ensure your env variable changes take effect
-$ cf restage message-generation
+$ cf restage greeter-messages
 ....
 +
 ....
@@ -55,16 +55,16 @@ By default, the Spring Cloud Services Starters for Service Registry causes all a
 +
 image::greeting.png[link:docs/images/greeting.png]
 
-. You can see what the Message Generation application is sending back by viewing its logs. Run `cf logs message-generation`.
+. You can see what the Message Generation application is sending back by viewing its logs. Run `cf logs greeter-messages`.
 +
 ....
-$ cf logs message-generation
-Connected, tailing logs for app message-generation in org myorg / space development as user...
+$ cf logs greeter-messages
+Connected, tailing logs for app greeter-messages in org myorg / space development as user...
 
 2015-07-16T13:07:35.86-0500 [App/0]      OUT 2015-07-16 18:07:35.861  INFO 29 ---
-                     [o-61612-exec-10] message-generation.MessageGenerationApplication
+                     [o-61612-exec-10] greeter-messages.MessageGenerationApplication
                                                   : Now saying "Hello" to Bob
-2015-07-16T13:07:35.87-0500 [RTR/0]      OUT message-generation.wise.com:80 -
+2015-07-16T13:07:35.87-0500 [RTR/0]      OUT greeter-messages.wise.com:80 -
                      [16/07/2015:18:07:35 +0000]
                      "GET /greeting?salutation=Hello&name=Bob HTTP/1.1" 200
                      31 "-" "Apache-HttpClient/4.3.6 (java 1.5)" 10.68.204.250:39929

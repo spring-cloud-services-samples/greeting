@@ -1,9 +1,9 @@
 ---
 applications:
-  - name: greeter-message-generation
+  - name: greeter-messages
     instances: 1
     memory: 1G
     services:
       - greeter-service-registry
-    env:
-      SPRING_PROFILES_ACTIVE: dev
+#    env:
+#      SPRING_PROFILES_ACTIVE: dev

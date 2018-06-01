@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package messagegeneration;
+package messages;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,9 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class MessageGenerationController {
+public class MessagesController {
 
-	private Log log = LogFactory.getLog(MessageGenerationController.class);
+	private Log log = LogFactory.getLog(MessagesController.class);
 
 	@RequestMapping("/greeting")
 	public Greeting greeting(@RequestParam(value = "salutation", defaultValue = "Hello") String salutation, @RequestParam(value = "name", defaultValue = "Bob") String name) {

@@ -13,7 +13,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 jar {
-	baseName = "message-generation"
+	baseName = "greeter-messages"
 }
 
 dependencyManagement {

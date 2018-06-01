@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.wise</groupId>
-	<artifactId>message-generation</artifactId>
+	<artifactId>greeter-messages</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>message-generation</name>
+	<name>greeter-messages</name>
 	<description>Sample service application demonstrating use of Service Registry for Pivotal Cloud Foundry.
 	</description>
 

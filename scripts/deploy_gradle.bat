@@ -5,8 +5,8 @@ cf create-service p-service-registry standard greeter-service-registry > nul
   cf service greeter-service-registry | find "succeeded" > nul
   if errorlevel 1 goto :check
   echo Service Registry created. Pushing applications.
-  pushd message-generation
-  cf push -p build/libs/message-generation-0.0.1-SNAPSHOT.jar
+  pushd greeter-messages
+  cf push -p build/libs/greeter-messages-0.0.1-SNAPSHOT.jar
   popd
   pushd greeter
   cf push -p build/libs/greeter-0.0.1-SNAPSHOT.jar

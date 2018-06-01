@@ -42,7 +42,7 @@ public class GreeterServiceTest {
 
 	@Test
 	public void greet() {
-		given(this.rest.getForObject("//greeter-message-generation/greeting?salutation={salutation}&name={name}", Greeting.class, "Hello", "Bob"))
+		given(this.rest.getForObject("//greeter-messages/greeting?salutation={salutation}&name={name}", Greeting.class, "Hello", "Bob"))
 				.willReturn(new Greeting("Hello Bob"));
 		assertThat(this.greeter.greet("Hello", "Bob"))
 				.isNotNull()
