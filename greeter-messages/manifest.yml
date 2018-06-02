@@ -5,5 +5,3 @@ applications:
     memory: 1G
     services:
       - greeter-service-registry
-#    env:
-#      SPRING_PROFILES_ACTIVE: dev
