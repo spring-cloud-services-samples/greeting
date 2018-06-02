@@ -1,15 +1,3 @@
 spring:
   application:
     name: greeter-messages
-#  cloud:
-#    services:
-#      registrationMethod: route
-#
-#---
-#
-#spring:
-#  profiles: dev
-#
-#security:
-#  basic:
-#    enabled: false

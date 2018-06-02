@@ -1,21 +1,3 @@
 spring:
   application:
     name: greeter
-  cloud:
-    services:
-      registrationMethod: route
-
-server:
-  port: 8082
-
-producer:
-  ribbon:
-    ServerListRefreshInterval: 5000
-ribbon:
-  IsSecure: false
-
-  profiles: dev
-
-security:
-  basic:
-    enabled: false
