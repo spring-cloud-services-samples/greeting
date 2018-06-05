@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(GreeterController.class)
+@WebMvcTest(controllers = GreeterController.class, secure = false)
 public class GreeterControllerTest {
 
 	@Autowired
@@ -45,16 +45,20 @@ public class GreeterControllerTest {
 	public void helloDefault() throws Exception {
 		given(this.greeterService.greet("Hello", "Bob"))
 				.willReturn(new Greeting("Hello Bob"));
-		this.mvc.perform(get("/hello").accept(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(status().isOk()).andExpect(content().string("Hello Bob"));
+		this.mvc.perform(get("/hello")
+				.accept(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(status().isOk())
+				.andExpect(content().string("Hello Bob"));
 	}
 
 	@Test
 	public void helloWithParams() throws Exception {
 		given(this.greeterService.greet("Hi", "Tom"))
 				.willReturn(new Greeting("Hi Tom"));
-		this.mvc.perform(get("/hello?salutation=Hi&name=Tom").accept(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(status().isOk()).andExpect(content().string("Hi Tom"));
+		this.mvc.perform(get("/hello?salutation=Hi&name=Tom")
+				.accept(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(status().isOk())
+				.andExpect(content().string("Hi Tom"));
 	}
 
 }

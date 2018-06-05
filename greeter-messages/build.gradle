@@ -25,8 +25,9 @@ dependencyManagement {
 }
 
 dependencies {
-	compile("org.springframework.boot:spring-boot-starter-web")
 	compile("io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry")
+	compile("org.springframework.boot:spring-boot-starter-web")
+	compile("org.springframework.boot:spring-boot-starter-security")
 	testCompile("org.springframework.boot:spring-boot-starter-test")
 	testCompile("org.mockito:mockito-core")
 	testCompile("org.assertj:assertj-core")
