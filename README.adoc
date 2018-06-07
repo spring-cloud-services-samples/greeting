@@ -1,5 +1,7 @@
 :imagesdir: docs/images
 
+image:https://circleci.com/gh/spring-cloud-services-samples/greeting.svg?style=svg["CircleCI", link="https://circleci.com/gh/spring-cloud-services-samples/greeting"]
+
 = Service Registry sample
 
 *Message Generation* and *Greeter* are example applications demonstrating the use of Service Registry for Pivotal Cloud Foundry. (For information on the Service Registry product, please http://docs.pivotal.io/spring-cloud-services/service-registry/[see the documentation].)
