@@ -1,6 +1,6 @@
 ---
 applications:
-  - name: greeter-messages
+  - name: greeter-messages-cs
     instances: 1
     memory: 1G
     services:
