@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-  @FeignClient("greeter-messages")
-  interface MessagesClient {
-    @RequestMapping(value = "/greeting", method = GET)
-    Greeting greeting(@RequestParam("name") String name, @RequestParam("salutation") String salutation);
-  }
+@FeignClient("greeter-messages")
+interface MessagesClient {
+  @RequestMapping(value = "/greeting", method = GET)
+  Greeting greeting(@RequestParam("name") String name, @RequestParam("salutation") String salutation);
+}
