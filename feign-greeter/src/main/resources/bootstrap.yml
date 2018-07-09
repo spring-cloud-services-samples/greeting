@@ -2,18 +2,5 @@ spring:
   cloud:
     services:
       registrationMethod: route
-
-server:
-  port: 8082
-
-producer:
-  ribbon:
-    ServerListRefreshInterval: 5000
-
----
-spring:
-  profiles: dev
-
-security:
-  basic:
-    enabled: false
+  profiles:
+    active: development
