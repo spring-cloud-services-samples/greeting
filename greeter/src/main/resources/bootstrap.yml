@@ -14,6 +14,8 @@ producer:
 ribbon:
   IsSecure: false
 
+---
+spring:
   profiles: dev
 
 security:
