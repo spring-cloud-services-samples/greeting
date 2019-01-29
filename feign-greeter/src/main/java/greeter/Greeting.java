@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Greeting {
 
-    private String message;
+    private final String message;
 
     @JsonCreator
     public Greeting(@JsonProperty("message") String message) {
