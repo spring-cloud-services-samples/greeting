@@ -1,6 +1,6 @@
 @echo off
 echo Creating Service Registry...
-cf create-service p-service-registry standard greeter-service-registry > nul
+cf create-service p.service-registry standard greeter-service-registry > nul
 :check
   cf service greeter-service-registry | find "succeeded" > nul
   if errorlevel 1 goto :check
