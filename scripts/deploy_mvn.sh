@@ -1,6 +1,6 @@
 echo -n "Creating Service Registry..."
 {
-  cf create-service p-service-registry standard greeter-service-registry
+  cf create-service p.service-registry standard greeter-service-registry
 } &> /dev/null
 until [ `cf service greeter-service-registry | grep -c "succeeded"` -eq 1  ]
 do
