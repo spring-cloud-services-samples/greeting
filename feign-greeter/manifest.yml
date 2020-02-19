@@ -3,6 +3,7 @@ applications:
   - name: greeter
     instances: 1
     memory: 1G
+    random-route: true
     services:
       - greeter-service-registry
     env:
