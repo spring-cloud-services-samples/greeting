@@ -3,6 +3,7 @@ applications:
   - name: greeter-messages-cs
     instances: 1
     memory: 1G
+    random-route: true
     services:
       - greeter-service-registry
     env:
