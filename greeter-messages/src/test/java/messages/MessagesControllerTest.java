@@ -24,18 +24,20 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.security.test.context.support.WithMockUser;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers = MessagesController.class, secure = false)
+@WebMvcTest(controllers = MessagesController.class)
 public class MessagesControllerTest {
 
 	@Autowired
 	private MockMvc mvc;
 
+  @WithMockUser(value = "Cookie")
 	@Test
 	public void greetingDefault() throws Exception {
 		this.mvc.perform(get("/greeting")
@@ -44,6 +46,7 @@ public class MessagesControllerTest {
 				.andExpect(content().string("{\"message\":\"Hello, Bob!\"}"));
 	}
 
+  @WithMockUser(value = "Cookie")
 	@Test
 	public void greetingWithParams() throws Exception {
 		this.mvc.perform(get("/greeting?salutation=Hi&name=Tom")
@@ -52,6 +55,7 @@ public class MessagesControllerTest {
 				.andExpect(content().string("{\"message\":\"Hi, Tom!\"}"));
 	}
 
+  @WithMockUser(value = "Cookie")
 	@Test
 	public void greetingWithSalutationParam() throws Exception {
 		this.mvc.perform(get("/greeting?salutation=Hi")
@@ -60,6 +64,7 @@ public class MessagesControllerTest {
 				.andExpect(content().string("{\"message\":\"Hi, Bob!\"}"));
 	}
 
+  @WithMockUser(value = "Cookie")
 	@Test
 	public void greetingWithNameParam() throws Exception {
 		this.mvc.perform(get("/greeting?name=Tom")
@@ -68,6 +73,7 @@ public class MessagesControllerTest {
 				.andExpect(content().string("{\"message\":\"Hello, Tom!\"}"));
 	}
 
+  @WithMockUser(value = "Cookie")
 	@Test
 	public void greetingWithUnknownParams() throws Exception {
 		this.mvc.perform(get("/greeting?foo=bar&baz=buz")

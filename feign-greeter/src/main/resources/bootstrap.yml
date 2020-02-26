@@ -1,6 +1,0 @@
-spring:
-  cloud:
-    services:
-      registrationMethod: route
-  profiles:
-    active: development

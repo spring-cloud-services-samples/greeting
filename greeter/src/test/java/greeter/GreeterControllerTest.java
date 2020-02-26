@@ -25,6 +25,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.security.test.context.support.WithMockUser;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers = GreeterController.class, secure = false)
+@WebMvcTest(controllers = GreeterController.class)
 public class GreeterControllerTest {
 
 	@Autowired
@@ -41,6 +42,7 @@ public class GreeterControllerTest {
 	@MockBean
 	private GreeterService greeterService;
 
+  @WithMockUser(value = "Cookie")
 	@Test
 	public void helloDefault() throws Exception {
 		given(this.greeterService.greet("Hello", "Bob"))
@@ -51,6 +53,7 @@ public class GreeterControllerTest {
 				.andExpect(content().string("Hello Bob"));
 	}
 
+  @WithMockUser(value = "Cookie")
 	@Test
 	public void helloWithParams() throws Exception {
 		given(this.greeterService.greet("Hi", "Tom"))
