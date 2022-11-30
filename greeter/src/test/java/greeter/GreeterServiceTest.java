@@ -16,20 +16,19 @@
 
 package greeter;
 
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestTemplate;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.BDDMockito.given;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class GreeterServiceTest {
 
 	@Mock
@@ -48,12 +47,12 @@ public class GreeterServiceTest {
 				.willReturn(new Greeting("Hello Bob"));
 		assertThat(this.greeter.greet("Hello", "Bob"))
 				.isNotNull()
-				.isEqualToComparingFieldByField(new Greeting("Hello Bob"));
+				.usingRecursiveComparison().isEqualTo(new Greeting("Hello Bob"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void greetNulls() {
-		this.greeter.greet(null, null);
+		assertThatThrownBy(() -> this.greeter.greet(null, null)).isInstanceOf(IllegalArgumentException.class);
 	}
 
 }
