@@ -48,7 +48,7 @@ public class GreeterControllerTest {
 		given(this.greeterService.greet("Hello", "Bob"))
 				.willReturn(new Greeting("Hello Bob"));
 		this.mvc.perform(get("/hello")
-				.accept(MediaType.APPLICATION_JSON_UTF8))
+				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string("Hello Bob"));
 	}
@@ -59,7 +59,7 @@ public class GreeterControllerTest {
 		given(this.greeterService.greet("Hi", "Tom"))
 				.willReturn(new Greeting("Hi Tom"));
 		this.mvc.perform(get("/hello?salutation=Hi&name=Tom")
-				.accept(MediaType.APPLICATION_JSON_UTF8))
+				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string("Hi Tom"));
 	}

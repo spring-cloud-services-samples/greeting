@@ -41,7 +41,7 @@ public class MessagesControllerTest {
 	@Test
 	public void greetingDefault() throws Exception {
 		this.mvc.perform(get("/greeting")
-				.accept(MediaType.APPLICATION_JSON_UTF8))
+				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string("{\"message\":\"Hello, Bob!\"}"));
 	}
@@ -50,7 +50,7 @@ public class MessagesControllerTest {
 	@Test
 	public void greetingWithParams() throws Exception {
 		this.mvc.perform(get("/greeting?salutation=Hi&name=Tom")
-				.accept(MediaType.APPLICATION_JSON_UTF8))
+				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string("{\"message\":\"Hi, Tom!\"}"));
 	}
@@ -59,7 +59,7 @@ public class MessagesControllerTest {
 	@Test
 	public void greetingWithSalutationParam() throws Exception {
 		this.mvc.perform(get("/greeting?salutation=Hi")
-				.accept(MediaType.APPLICATION_JSON_UTF8))
+				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string("{\"message\":\"Hi, Bob!\"}"));
 	}
@@ -68,7 +68,7 @@ public class MessagesControllerTest {
 	@Test
 	public void greetingWithNameParam() throws Exception {
 		this.mvc.perform(get("/greeting?name=Tom")
-				.accept(MediaType.APPLICATION_JSON_UTF8))
+				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string("{\"message\":\"Hello, Tom!\"}"));
 	}
@@ -77,7 +77,7 @@ public class MessagesControllerTest {
 	@Test
 	public void greetingWithUnknownParams() throws Exception {
 		this.mvc.perform(get("/greeting?foo=bar&baz=buz")
-				.accept(MediaType.APPLICATION_JSON_UTF8))
+				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string("{\"message\":\"Hello, Bob!\"}"));
 	}

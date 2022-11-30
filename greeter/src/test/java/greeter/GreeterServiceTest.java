@@ -18,6 +18,8 @@ package greeter;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -35,7 +37,7 @@ public class GreeterServiceTest {
 
 	private GreeterService greeter;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		this.greeter = new GreeterService(rest);
 	}
