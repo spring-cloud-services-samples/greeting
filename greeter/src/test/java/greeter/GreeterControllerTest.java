@@ -43,7 +43,7 @@ public class GreeterControllerTest {
 	@MockBean
 	private GreeterService greeterService;
 
-  @WithMockUser(value = "Cookie")
+    @WithMockUser(value = "Cookie")
 	@Test
 	public void helloDefault() throws Exception {
 		given(this.greeterService.greet("Hello", "Bob"))
@@ -54,7 +54,7 @@ public class GreeterControllerTest {
 				.andExpect(content().string("Hello Bob"));
 	}
 
-  @WithMockUser(value = "Cookie")
+    @WithMockUser(value = "Cookie")
 	@Test
 	public void helloWithParams() throws Exception {
 		given(this.greeterService.greet("Hi", "Tom"))

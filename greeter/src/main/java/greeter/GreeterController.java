@@ -16,8 +16,7 @@
 
 package greeter;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,10 +29,10 @@ public class GreeterController {
 		this.greeter = greeter;
 	}
 
-	@RequestMapping(value = "/hello", method = RequestMethod.GET)
+	@GetMapping(value = "/hello")
 	public String hello(@RequestParam(value = "salutation", defaultValue = "Hello") String salutation, @RequestParam(value = "name", defaultValue = "Bob") String name) {
 		Greeting greeting = greeter.greet(salutation, name);
-		return greeting.getMessage();
+		return greeting.message();
 	}
 
 }

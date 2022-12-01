@@ -37,7 +37,7 @@ public class MessagesControllerTest {
 	@Autowired
 	private MockMvc mvc;
 
-  @WithMockUser(value = "Cookie")
+    @WithMockUser(value = "Cookie")
 	@Test
 	public void greetingDefault() throws Exception {
 		this.mvc.perform(get("/greeting")
@@ -46,7 +46,7 @@ public class MessagesControllerTest {
 				.andExpect(content().string("{\"message\":\"Hello, Bob!\"}"));
 	}
 
-  @WithMockUser(value = "Cookie")
+    @WithMockUser(value = "Cookie")
 	@Test
 	public void greetingWithParams() throws Exception {
 		this.mvc.perform(get("/greeting?salutation=Hi&name=Tom")
@@ -55,7 +55,7 @@ public class MessagesControllerTest {
 				.andExpect(content().string("{\"message\":\"Hi, Tom!\"}"));
 	}
 
-  @WithMockUser(value = "Cookie")
+    @WithMockUser(value = "Cookie")
 	@Test
 	public void greetingWithSalutationParam() throws Exception {
 		this.mvc.perform(get("/greeting?salutation=Hi")
@@ -64,7 +64,7 @@ public class MessagesControllerTest {
 				.andExpect(content().string("{\"message\":\"Hi, Bob!\"}"));
 	}
 
-  @WithMockUser(value = "Cookie")
+    @WithMockUser(value = "Cookie")
 	@Test
 	public void greetingWithNameParam() throws Exception {
 		this.mvc.perform(get("/greeting?name=Tom")
@@ -73,7 +73,7 @@ public class MessagesControllerTest {
 				.andExpect(content().string("{\"message\":\"Hello, Tom!\"}"));
 	}
 
-  @WithMockUser(value = "Cookie")
+    @WithMockUser(value = "Cookie")
 	@Test
 	public void greetingWithUnknownParams() throws Exception {
 		this.mvc.perform(get("/greeting?foo=bar&baz=buz")
