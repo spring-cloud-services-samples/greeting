@@ -16,14 +16,15 @@
 
 package greeter;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.security.test.context.support.WithMockUser;
 
@@ -32,7 +33,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = GreeterController.class)
 public class GreeterControllerTest {
 
@@ -42,24 +43,24 @@ public class GreeterControllerTest {
 	@MockBean
 	private GreeterService greeterService;
 
-  @WithMockUser(value = "Cookie")
+    @WithMockUser(value = "Cookie")
 	@Test
 	public void helloDefault() throws Exception {
 		given(this.greeterService.greet("Hello", "Bob"))
 				.willReturn(new Greeting("Hello Bob"));
 		this.mvc.perform(get("/hello")
-				.accept(MediaType.APPLICATION_JSON_UTF8))
+				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string("Hello Bob"));
 	}
 
-  @WithMockUser(value = "Cookie")
+    @WithMockUser(value = "Cookie")
 	@Test
 	public void helloWithParams() throws Exception {
 		given(this.greeterService.greet("Hi", "Tom"))
 				.willReturn(new Greeting("Hi Tom"));
 		this.mvc.perform(get("/hello?salutation=Hi&name=Tom")
-				.accept(MediaType.APPLICATION_JSON_UTF8))
+				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string("Hi Tom"));
 	}

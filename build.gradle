@@ -1,6 +1,12 @@
 subprojects {
 	apply plugin: 'java'
+	apply plugin: 'eclipse'
+	apply plugin: 'idea'
+
 	repositories {
 		mavenCentral()
+		maven { url 'https://repo.spring.io/release' }
+		maven { url 'https://repo.spring.io/milestone' }
+		maven { url 'https://repo.spring.io/snapshot' }
 	}
 }

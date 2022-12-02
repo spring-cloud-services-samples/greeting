@@ -16,13 +16,13 @@
 
 package messages;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.security.test.context.support.WithMockUser;
 
@@ -30,54 +30,54 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = MessagesController.class)
 public class MessagesControllerTest {
 
 	@Autowired
 	private MockMvc mvc;
 
-  @WithMockUser(value = "Cookie")
+    @WithMockUser(value = "Cookie")
 	@Test
 	public void greetingDefault() throws Exception {
 		this.mvc.perform(get("/greeting")
-				.accept(MediaType.APPLICATION_JSON_UTF8))
+				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string("{\"message\":\"Hello, Bob!\"}"));
 	}
 
-  @WithMockUser(value = "Cookie")
+    @WithMockUser(value = "Cookie")
 	@Test
 	public void greetingWithParams() throws Exception {
 		this.mvc.perform(get("/greeting?salutation=Hi&name=Tom")
-				.accept(MediaType.APPLICATION_JSON_UTF8))
+				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string("{\"message\":\"Hi, Tom!\"}"));
 	}
 
-  @WithMockUser(value = "Cookie")
+    @WithMockUser(value = "Cookie")
 	@Test
 	public void greetingWithSalutationParam() throws Exception {
 		this.mvc.perform(get("/greeting?salutation=Hi")
-				.accept(MediaType.APPLICATION_JSON_UTF8))
+				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string("{\"message\":\"Hi, Bob!\"}"));
 	}
 
-  @WithMockUser(value = "Cookie")
+    @WithMockUser(value = "Cookie")
 	@Test
 	public void greetingWithNameParam() throws Exception {
 		this.mvc.perform(get("/greeting?name=Tom")
-				.accept(MediaType.APPLICATION_JSON_UTF8))
+				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string("{\"message\":\"Hello, Tom!\"}"));
 	}
 
-  @WithMockUser(value = "Cookie")
+    @WithMockUser(value = "Cookie")
 	@Test
 	public void greetingWithUnknownParams() throws Exception {
 		this.mvc.perform(get("/greeting?foo=bar&baz=buz")
-				.accept(MediaType.APPLICATION_JSON_UTF8))
+				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string("{\"message\":\"Hello, Bob!\"}"));
 	}
