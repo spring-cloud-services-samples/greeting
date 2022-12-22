@@ -3,10 +3,13 @@ subprojects {
 	apply plugin: 'eclipse'
 	apply plugin: 'idea'
 
+	ext {
+		set('springCloudServicesVersion', '4.0.0')
+		set('springCloudVersion', '2022.0.0')
+	}
+
 	repositories {
 		mavenCentral()
-		maven { url 'https://repo.spring.io/release' }
-		maven { url 'https://repo.spring.io/milestone' }
-		maven { url 'https://repo.spring.io/snapshot' }
+		maven { url "https://repo.spring.io/release" }
 	}
 }

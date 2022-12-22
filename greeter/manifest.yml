@@ -3,8 +3,8 @@ applications:
   - name: greeter-cs
     instances: 1
     memory: 1G
-    random-route: true
     services:
       - greeter-service-registry
     env:
       SPRING_PROFILES_ACTIVE: development
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ }}'

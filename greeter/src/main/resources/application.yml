@@ -1,7 +1,6 @@
 spring:
   application:
-    name: greeter-messages
-
+    name: greeter
 
 management:
   endpoints:
