@@ -1,6 +1,6 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.6'
-	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'org.springframework.boot' version '3.0.1'
+	id 'io.spring.dependency-management' version '1.1.0'
 }
 
 version = '0.0.1-SNAPSHOT'
@@ -10,15 +10,11 @@ jar {
 	archiveBaseName = 'greeter'
 }
 
-ext {
-	set('springCloudServicesVersion', '3.5.0')
-	set('springCloudVersion', '2021.0.5')
-}
-
 dependencies {
 	implementation 'io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
@@ -29,10 +25,6 @@ dependencyManagement {
 		mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:${springCloudServicesVersion}"
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
-}
-
-task wrapper(type: Wrapper) {
-	gradleVersion = '7.5.1'
 }
 
 tasks.named('test') {

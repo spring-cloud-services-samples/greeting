@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 echo -n "Creating Service Registry..."
 {
   cf create-service p.service-registry standard greeter-service-registry

@@ -28,12 +28,11 @@ public class SecurityConfiguration {
 
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http
-			.authorizeRequests().anyRequest().permitAll()
+		return http
+			.authorizeHttpRequests().anyRequest().permitAll()
 			.and()
 			.httpBasic().disable()
-			.csrf().disable();
-
-		return http.build();
+			.csrf().disable()
+			.build();
 	}
 }

@@ -25,15 +25,14 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @Profile("development")
 public class SecurityConfiguration {
-    @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-          .authorizeRequests()
-          .anyRequest().permitAll()
-          .and().httpBasic().disable()
-          .csrf().disable();
 
-        return http.build();
-    }
-
+	@Bean
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		return http
+			.authorizeHttpRequests().anyRequest().permitAll()
+			.and()
+			.httpBasic().disable()
+			.csrf().disable()
+			.build();
+	}
 }
