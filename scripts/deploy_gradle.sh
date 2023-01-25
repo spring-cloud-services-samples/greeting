@@ -3,9 +3,8 @@
 echo -n "Creating Service Registry..."
 {
   cf create-service p.service-registry standard greeter-service-registry
-} &> /dev/null
-until [ `cf service greeter-service-registry | grep -c "succeeded"` -eq 1  ]
-do
+} &>/dev/null
+until [ "$(cf service greeter-service-registry | grep -c "succeeded")" -eq 1 ]; do
   echo -n "."
 done
 echo
