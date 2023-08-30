@@ -1,0 +1,33 @@
+---
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  name: greeter-messages
+  namespace: my-apps
+  labels:
+    apps.tanzu.vmware.com/workload-type: server
+    apps.tanzu.vmware.com/has-tests: "true"
+    app.kubernetes.io/part-of: greeter
+spec:
+  build:
+    env:
+      - name: BP_JVM_VERSION
+        value: "17"
+      - name: BP_GRADLE_BUILT_MODULE
+        value: "greeter-messages"
+      - name: BP_GRADLE_BUILD_ARGUMENTS
+        value: "--no-daemon clean bootJar"
+  env:
+    - name: SPRING_PROFILES_ACTIVE
+      value: "development"
+  serviceClaims:
+    - name: eureka
+      ref:
+        apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+        kind: ResourceClaim
+        name: eurekaserver-sample
+  source:
+    git:
+      url: https://github.com/spring-cloud-services-samples/greeting
+      ref:
+        branch: main
