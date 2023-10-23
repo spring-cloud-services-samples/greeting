@@ -7,7 +7,124 @@ image:https://circleci.com/gh/spring-cloud-services-samples/greeting.svg?style=s
 
 The main branch is using `spring-boot 3.0.0` and `spring-cloud 2022.0.0`. Check https://github.com/spring-cloud-services-samples/greeting/tree/spring-boot-2.7[spring-boot-2.7] branch for older versions.
 
-== Building and Deploying
+== Building and Deploying on Tanzu Application Platform (TAP)
+
+Greeting with Service Registry on TAP has the following deployment architecture:
+
+image::tap.jpg[link:docs/images/tap.jpg]
+
+The `eureka-controller` manages a `StatefulSet` of eureka servers and connection Secrets that Greeter and Greeter Messages use to connect to discover each other.
+
+. Create a `EurekaServer` resource with two replicas using the provided YAML definition:
++
+....
+kubectl apply -f tap/eurekaserver.yaml
+....
++
+
+. Check the status of the `EurekaServer`:
++
+....
+kubectl describe eurekaservers.service-registry.spring.apps.tanzu.vmware.com eurekaserver-sample -n my-apps
+....
+For example:
++
+....
+ k describe eurekaservers.service-registry.spring.apps.tanzu.vmware.com eurekaserver-sample
+Name:         eurekaserver-sample
+Namespace:    my-apps
+Labels:       <none>
+Annotations:  <none>
+API Version:  service-registry.spring.apps.tanzu.vmware.com/v1alpha1
+Kind:         EurekaServer
+Metadata:
+  Creation Timestamp:  2023-10-20T13:53:51Z
+  Generation:          1
+  Resource Version:    1727487
+  UID:                 1c411573-281a-4ec1-b81e-65f746404ac8
+Spec:
+  Replicas:  2
+Status:
+  Binding:
+    Name:  eureka-eurekaserver-sample-client-binding-z5tmh
+  Conditions:
+    Last Transition Time:  2023-10-20T13:53:57Z
+    Message:               EurekaServer reconciled
+    Observed Generation:   1
+    Reason:                EurekaServerReconciled
+    Status:                True
+    Type:                  Ready
+  Observed Generation:     1
+  Server Binding:
+    Name:  eureka-eurekaserver-sample-server-binding-m946r
+Events:    <none>
+....
++
+A successful `EurekaServer` resource has a `Ready` condition set to `true` and a `status.binding.name` field pointing to a secret containing connection information.
+
+. Claim credentials using the Tanzu CLI:
++
+....
+tanzu service resource-claim create -n my-apps eurekaserver-sample \
+    --resource-name eurekaserver-sample \
+    --resource-kind EurekaServer \
+    --resource-api-version service-registry.spring.apps.tanzu.vmware.com/v1alpha1 \
+    --resource-namespace my-apps
+....
++
+[NOTE]
+====
+Alternatively the provided `ResourceClaim` yaml definition can be used:
+....
+kubectl apply -f tap/resource-claim.yaml
+....
+====
+
+. Create workloads for both `greeter` and `greeter-messages` using the Tanzu CLI:
++
+....
+tanzu apps workload create -f tap/greeter-messages.yaml --yes
+tanzu apps workload create -f tap/greeter.yaml --yes
+....
+
+=== Trying it Out
+
+. Retrieve the ingress route associated with the Greeter application using the tanzu cli:
++
+....
+tanzu apps workload get greeter
+....
+For example:
++
+....
+$ tanzu apps workload get greeter
+
+# other output...
+
+🚢 Knative Services
+   NAME      READY   URL
+   greeter   Ready   https://greeter.my-apps.tap
+
+To see logs: "tanzu apps workload tail greeter --timestamp --since 1h"
+....
+Where `https://greeter.my-apps.tap` is the accessible ingress route to the greeter application
+
+. Visit `[ROUTE]/hello`, where `[ROUTE]` is the ingress route you just retrieved. The Greeter application will use the Service Registry to look up the Message Generation application and get a greeting message, which (to begin with) should be “Hello, Bob!”
+
+. You can see what the Message Generation application is sending back by viewing its logs, using `tanzu apps workload tail greeter-messages`:
++
+....
+$ tanzu apps workload tail greeter-messages
+
+greeter-messages-579d67c498-bf6zl[workload] 2023-10-20T17:52:17.001Z  INFO 1 --- [nio-8080-exec-3] messages.MessagesController              : Now saying "Hi" to John
+....
++
+
+. To get a different greeting message, you can provide `salutation` and `name` parameters, as in `[ROUTE]/hello?salutation=Hi&name=John`. The Greeter application will send those parameters to the Message Generation application and the resulting greeting will be customized to match.
+
+For more information about the Service Registry and its use in a client application, see the https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.7/tap/service-registry-overview.html[Service Registry documentation].
+
+== Building and Deploying on Tanzu Application Service (TAS)
 
 . Build the two projects from the root (`greeting`) directory. If using Maven, run:
 +
@@ -35,7 +152,7 @@ The script will create a Service Registry service instance and then push the app
 By default, the Spring Cloud Services Starters for Service Registry causes all application endpoints to be secured by HTTP Basic authentication. For more information or if you wish to disable this, https://docs.pivotal.io/spring-cloud-services/service-registry/writing-client-applications.html#disable-http-basic-auth[see the documentation]. (HTTP Basic authentication is disabled in these sample applications.)
 ====
 
-== Trying It Out
+=== Trying It Out
 
 . Visit `[ROUTE]/hello`, where `[ROUTE]` is the route bound to the Greeter application. The Greeter application will use the Service Registry to look up the Message Generation application and get a greeting message, which (to begin with) should be &#8220;Hello, Bob!&#8221;
 +
