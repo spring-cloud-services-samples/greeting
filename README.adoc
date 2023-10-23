@@ -74,7 +74,7 @@ tanzu service resource-claim create -n my-apps eurekaserver-sample \
 +
 [NOTE]
 ====
-Alternative the provided `ResourceClaim` yaml definition can be used:
+Alternatively the provided `ResourceClaim` yaml definition can be used:
 ....
 kubectl apply -f tap/resource-claim.yaml
 ....
