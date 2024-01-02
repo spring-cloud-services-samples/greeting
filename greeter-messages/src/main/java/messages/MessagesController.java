@@ -26,11 +26,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MessagesController {
 
-	private Log log = LogFactory.getLog(MessagesController.class);
+	private static final Log LOG = LogFactory.getLog(MessagesController.class);
 
 	@RequestMapping("/greeting")
 	public Greeting greeting(@RequestParam(value = "salutation", defaultValue = "Hello") String salutation, @RequestParam(value = "name", defaultValue = "Bob") String name) {
-		log.info(String.format("Now saying \"%s\" to %s", salutation, name));
+		LOG.info(String.format("Now saying \"%s\" to %s", salutation, name));
 		return new Greeting(salutation, name);
 	}
 
