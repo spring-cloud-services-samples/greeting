@@ -1,0 +1,7 @@
+---
+apiVersion: service-registry.spring.apps.tanzu.vmware.com/v1alpha1
+kind: EurekaServer
+metadata:
+  name: service-registry
+spec:
+  replicas: 2

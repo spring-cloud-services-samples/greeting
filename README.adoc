@@ -182,3 +182,25 @@ Connected, tailing logs for app greeter-messages in org myorg / space developmen
 image::greeting-with-parameters.png[link:docs/images/greeting-with-parameters.png]
 
 For more information about the Service Registry and its use in a client application, see the https://docs.pivotal.io/spring-cloud-services/service-registry/writing-client-applications.html[Service Registry documentation].
+
+== Building and Deploying on Tanzu Platform (TP)
+
+. Build the two projects from the root directory with:
++
+....
+mkdir -p ./build/tanzu
+tanzu build --output-dir ./build/tanzu
+....
++
+. Deploy both applications together with a `EurekaServer`:
++
+....
+tanzu deploy --yes --from-build ./build/tanzu/
+....
++
+. Eventually delete the applications and the `EurekaServer`:
++
+....
+export KUBECONFIG=~/.config/tanzu/kube/config
+kapp delete -y -c -a $(yq .configuration.id <tanzu.yml)
+....

@@ -1,0 +1,44 @@
+---
+apiVersion: apps.tanzu.vmware.com/v1
+kind: ContainerApp
+metadata:
+  name: greeter-messages
+spec:
+  build:
+    buildpacks: {}
+    path: ../..
+    nonSecretEnv:
+      - name: BP_JVM_VERSION
+        value: "17"
+      - name: BP_GRADLE_BUILD_ARGUMENTS
+        value: --no-daemon clean bootJar
+      - name: BP_GRADLE_BUILT_MODULE
+        value: greeter-messages
+  nonSecretEnv:
+    - name: SPRING_PROFILES_ACTIVE
+      value: development
+    - name: EUREKA_INSTANCE_HOSTNAME
+      value: greeter-messages
+  acceptedServiceBindings:
+    - name: greeter-messages-uses-service-registry
+      types:
+        - eureka
+  ports:
+    - name: main
+      port: 8080
+
+---
+apiVersion: services.tanzu.vmware.com/v1
+kind: ServiceBinding
+metadata:
+  name: greeter-messages-uses-service-registry
+spec:
+  alias: eureka
+  serviceRef:
+    apiGroup: service-registry.spring.apps.tanzu.vmware.com
+    kind: EurekaServer
+    name: service-registry
+  targetRef:
+    apiGroup: apps.tanzu.vmware.com
+    kind: ContainerApp
+    name: greeter-messages

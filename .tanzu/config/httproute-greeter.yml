@@ -1,0 +1,18 @@
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  annotations:
+    apps.tanzu.vmware.com/promotable: ""
+    apps.tanzu.vmware.com/promote-group: ContainerApp/greeter
+  name: greeter
+spec:
+  parentRefs:
+    - group: networking.tanzu.vmware.com
+      kind: Entrypoint
+      name: greeter
+  rules:
+    - backendRefs:
+        - kind: Service
+          name: greeter
+          port: 8080
