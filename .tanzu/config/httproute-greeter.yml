@@ -10,7 +10,7 @@ spec:
   parentRefs:
     - group: networking.tanzu.vmware.com
       kind: Entrypoint
-      name: greeter
+      name: main
   rules:
     - backendRefs:
         - kind: Service
