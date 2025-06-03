@@ -5,7 +5,7 @@ image:https://circleci.com/gh/spring-cloud-services-samples/greeting.svg?style=s
 
 *Message Generation* and *Greeter* are example applications demonstrating the use of Service Registry for Tanzu. (For information on the Service Registry product in Tanzu Application Service, please https://docs.vmware.com/en/Spring-Cloud-Services-for-VMware-Tanzu/3.2/spring-cloud-services/GUID-service-registry-index.html[see the documentation].)
 
-The main branch is using `spring-boot 3.4.x` and `spring-cloud 2024.x.x`. Check https://github.com/spring-cloud-services-samples/greeting/tree/spring-boot-2.7[spring-boot-2.7] branch for older versions.
+The main branch is using `spring-boot 3.5.x` and `spring-cloud 2025.x.x`. Check https://github.com/spring-cloud-services-samples/greeting/tree/spring-boot-2.7[spring-boot-2.7] branch for older versions.
 
 == Building and Deploying on Tanzu Application Platform (TAP)
 
