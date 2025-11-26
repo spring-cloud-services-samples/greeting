@@ -4,7 +4,7 @@ subprojects {
 	apply plugin: 'idea'
 
 	ext {
-		set('springCloudServicesVersion', '4.3.1')
+		set('springCloudServicesVersion', '4.4.0')
 	}
 
 	repositories {
