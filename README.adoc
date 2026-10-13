@@ -10,28 +10,121 @@ The main branch is using `spring-boot 4.x` and the Tanzu Spring SDK `1.2.0`. Che
 == Dependencies
 
 Both applications import the Tanzu Spring SDK BOM (`com.vmware.tanzu.spring:tanzu-spring-sdk-dependencies`, version `1.2.0`).
-The BOM manages the version of `application-services-starter-service-registry`, which provides the Service Registry client,
-so the starter is declared without a version.
+The BOM manages the version of `application-services-starter-service-registry`, which provides the Service Registry client, so the
+starter is declared without a version.
 
-The BOM is published in the Spring Enterprise repository (`https://packages.broadcom.com/artifactory/spring-enterprise`),
-which requires credentials. Set them as environment variables before you build:
-
-....
-$ export SEC_ARTIFACTORY_USERNAME=your_username
-$ export SEC_ARTIFACTORY_PASSWORD=your_access_token
-....
-
-Gradle can also read `secArtifactoryUsername` and `secArtifactoryPassword` from `~/.gradle/gradle.properties`.
-Maven reads the credentials from a `spring-enterprise` server entry in `~/.m2/settings.xml`:
+Maven sets the SDK version and imports the BOM in the root `pom.xml`:
 
 [source,xml]
-....
-<server>
-  <id>spring-enterprise</id>
-  <username>${env.SEC_ARTIFACTORY_USERNAME}</username>
-  <password>${env.SEC_ARTIFACTORY_PASSWORD}</password>
-</server>
-....
+----
+<properties>
+  <tanzu-spring-sdk.version>1.2.0</tanzu-spring-sdk.version>
+</properties>
+
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>com.vmware.tanzu.spring</groupId>
+      <artifactId>tanzu-spring-sdk-dependencies</artifactId>
+      <version>${tanzu-spring-sdk.version}</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+----
+
+Each application declares the starter in its own `pom.xml`:
+
+[source,xml]
+----
+<dependencies>
+  <dependency>
+    <groupId>com.vmware.tanzu.spring.applicationservices</groupId>
+    <artifactId>application-services-starter-service-registry</artifactId>
+  </dependency>
+</dependencies>
+----
+
+Gradle sets the SDK version for both applications in the root `build.gradle`:
+
+[source,groovy]
+----
+subprojects {
+    ext {
+        set('tanzuSpringSdkVersion', '1.2.0')
+    }
+}
+----
+
+Each application imports the BOM and declares the starter in its own `build.gradle`:
+
+[source,groovy]
+----
+dependencyManagement {
+    imports {
+        mavenBom "com.vmware.tanzu.spring:tanzu-spring-sdk-dependencies:${tanzuSpringSdkVersion}"
+    }
+}
+
+dependencies {
+    implementation("com.vmware.tanzu.spring.applicationservices:application-services-starter-service-registry")
+}
+----
+
+To use a different SDK release, change `tanzu-spring-sdk.version` in the root `pom.xml` and `tanzuSpringSdkVersion` in the root `build.gradle`.
+Use the same version in both files.
+
+== Authentication Setup
+
+Both builds use the Spring Enterprise repository (`https://packages.broadcom.com/artifactory/spring-enterprise`),
+which requires credentials.
+For repository configuration, see https://techdocs.broadcom.com/us/en/vmware-tanzu/spring/tanzu-spring/commercial/spring-tanzu/guide-artifact-repository-administrators.html[Spring Enterprise Repository for Artifact Repository Administrators].
+
+=== 1. Set Environment Variables (Recommended)
+
+Set these environment variables before you build:
+
+[source,bash]
+----
+export SEC_ARTIFACTORY_USERNAME=your_username
+export SEC_ARTIFACTORY_PASSWORD=your_access_token
+----
+
+=== 2. Build Tool Specific Configuration
+
+*For Gradle:*
+
+Gradle reads the environment variables above.
+You can also set the credentials in `~/.gradle/gradle.properties`:
+
+[source,properties]
+----
+secArtifactoryUsername=your_username
+secArtifactoryPassword=your_access_token
+----
+
+*For Maven:*
+
+Add the `spring-enterprise` server to `~/.m2/settings.xml`.
+This configuration reads the environment variables from step 1.
+If the file already has a `servers` element, add the `server` entry to it.
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <servers>
+    <server>
+      <id>spring-enterprise</id>
+      <username>${env.SEC_ARTIFACTORY_USERNAME}</username>
+      <password>${env.SEC_ARTIFACTORY_PASSWORD}</password>
+    </server>
+  </servers>
+</settings>
+----
 
 == Building and Deploying on Tanzu Application Platform (TAP)
 
