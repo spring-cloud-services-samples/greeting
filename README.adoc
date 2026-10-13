@@ -5,7 +5,33 @@ image:https://circleci.com/gh/spring-cloud-services-samples/greeting.svg?style=s
 
 *Message Generation* and *Greeter* are example applications demonstrating the use of Service Registry for Tanzu. (For information on the Service Registry product in Tanzu Application Service, please https://docs.vmware.com/en/Spring-Cloud-Services-for-VMware-Tanzu/3.2/spring-cloud-services/GUID-service-registry-index.html[see the documentation].)
 
-The main branch is using `spring-boot 3.5.x` and `spring-cloud 2025.x.x`. Check https://github.com/spring-cloud-services-samples/greeting/tree/spring-boot-2.7[spring-boot-2.7] branch for older versions.
+The main branch is using `spring-boot 4.x` and the Tanzu Spring SDK `1.2.0`. Check https://github.com/spring-cloud-services-samples/greeting/tree/spring-boot-2.7[spring-boot-2.7] branch for older versions.
+
+== Dependencies
+
+Both applications import the Tanzu Spring SDK BOM (`com.vmware.tanzu.spring:tanzu-spring-sdk-dependencies`, version `1.2.0`).
+The BOM manages the version of `application-services-starter-service-registry`, which provides the Service Registry client,
+so the starter is declared without a version.
+
+The BOM is published in the Spring Enterprise repository (`https://packages.broadcom.com/artifactory/spring-enterprise`),
+which requires credentials. Set them as environment variables before you build:
+
+....
+$ export SEC_ARTIFACTORY_USERNAME=your_username
+$ export SEC_ARTIFACTORY_PASSWORD=your_access_token
+....
+
+Gradle can also read `secArtifactoryUsername` and `secArtifactoryPassword` from `~/.gradle/gradle.properties`.
+Maven reads the credentials from a `spring-enterprise` server entry in `~/.m2/settings.xml`:
+
+[source,xml]
+....
+<server>
+  <id>spring-enterprise</id>
+  <username>${env.SEC_ARTIFACTORY_USERNAME}</username>
+  <password>${env.SEC_ARTIFACTORY_PASSWORD}</password>
+</server>
+....
 
 == Building and Deploying on Tanzu Application Platform (TAP)
 
@@ -149,7 +175,7 @@ The script will create a Service Registry service instance and then push the app
 
 [NOTE]
 ====
-By default, the Spring Cloud Services Starters for Service Registry causes all application endpoints to be secured by HTTP Basic authentication. For more information or if you wish to disable this, https://docs.pivotal.io/spring-cloud-services/service-registry/writing-client-applications.html#disable-http-basic-auth[see the documentation]. (HTTP Basic authentication is disabled in these sample applications.)
+By default, the Application Services Starter for Service Registry causes all application endpoints to be secured by HTTP Basic authentication. For more information or if you wish to disable this, https://docs.pivotal.io/spring-cloud-services/service-registry/writing-client-applications.html#disable-http-basic-auth[see the documentation]. (HTTP Basic authentication is disabled in these sample applications.)
 ====
 
 === Trying It Out

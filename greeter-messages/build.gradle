@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '4.0.0'
+	id 'org.springframework.boot' version '4.1.1'
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
@@ -14,7 +14,7 @@ jar {
 }
 
 dependencies {
-	implementation 'io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry'
+	implementation 'com.vmware.tanzu.spring.applicationservices:application-services-starter-service-registry'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -26,7 +26,7 @@ dependencies {
 
 dependencyManagement {
 	imports {
-		mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:${springCloudServicesVersion}"
+		mavenBom "com.vmware.tanzu.spring:tanzu-spring-sdk-dependencies:${tanzuSpringSdkVersion}"
 	}
 }
 
