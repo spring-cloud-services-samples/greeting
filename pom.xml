@@ -11,15 +11,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.0</version>
+		<version>4.1.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
-		<spring-cloud-services.version>4.3.0</spring-cloud-services.version>
-	    <spring-cloud.version>2025.0.0</spring-cloud.version>
+		<tanzu-spring-sdk.version>1.2.0</tanzu-spring-sdk.version>
 	</properties>
 
 	<modules>
@@ -30,21 +29,28 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>io.pivotal.spring.cloud</groupId>
-				<artifactId>spring-cloud-services-dependencies</artifactId>
-				<version>${spring-cloud-services.version}</version>
+				<groupId>com.vmware.tanzu.spring</groupId>
+				<artifactId>tanzu-spring-sdk-dependencies</artifactId>
+				<version>${tanzu-spring-sdk.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<repositories>
+		<repository>
+			<id>spring-enterprise</id>
+			<url>https://packages.broadcom.com/artifactory/spring-enterprise</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-enterprise</id>
+			<url>https://packages.broadcom.com/artifactory/spring-enterprise</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<build>
 		<plugins>
